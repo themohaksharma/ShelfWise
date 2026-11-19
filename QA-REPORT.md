@@ -65,3 +65,14 @@ A private copy was created outside the project directory at `/Users/mohak/Docume
 - Test all public and application routes and transaction flows on a disposable environment.
 - Test database and photo persistence against the Render mounted disk after deployment.
 - The existing backend remains a Python standard-library `http.server` application and has not received an independent production security review. Do not treat this preparation as a security certification or as proof that it is ready for real financial/customer data.
+
+## Android LAN demo build
+
+| Check | Result |
+| --- | --- |
+| Capacitor Android project generation and asset sync | Passed locally (`npx cap add android`, `npm ci`, `npx cap sync android`) |
+| Android APK build | Passed in GitHub Actions run `44636809211`; debug APK artifact downloaded to `android/app/build/outputs/apk/debug/app-debug.apk` (3.9 MB) |
+| Current Mac server | Restarted only after confirming PID 12300 belonged to this project; PID 20400 now listens on `*:8765` |
+| LAN reachability | Passed: Mac Wi-Fi address returned HTTP 200 at `/healthz`; demo workspace API returned 8 products and 270 sales |
+| Android emulator/physical-device launch | Not tested; no Android SDK/emulator or connected Android device available locally |
+| Camera barcode scan and image gallery upload on Android | Not tested on a device; the app declares camera/image permissions, but LAN HTTP camera capture needs device verification. Manual SKU/barcode entry remains available |
