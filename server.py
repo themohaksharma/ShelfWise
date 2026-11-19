@@ -10,9 +10,9 @@ from urllib.parse import urlparse, parse_qs, unquote
 
 ROOT = Path(__file__).resolve().parent
 DB_PATH = Path(os.environ.get('SHELFWISE_DB_PATH', str(ROOT / 'shelfwise.sqlite3'))).expanduser().resolve()
-PORT = int(os.environ.get('PORT', '10000'))
+PORT = int(os.environ.get('PORT', '8765'))
 APP_ENV = os.environ.get('APP_ENV', 'development').strip().lower()
-HOST = os.environ.get('SHELFWISE_HOST', '0.0.0.0' if APP_ENV == 'production' else '127.0.0.1')
+HOST = os.environ.get('SHELFWISE_HOST', '0.0.0.0')
 SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'true' if APP_ENV == 'production' else 'false').strip().lower() in ('1', 'true', 'yes', 'on')
 DEMO_ID = 'demo-shop'
 SESSION_COOKIE = 'shelfwise_session'
@@ -309,6 +309,10 @@ class Handler(SimpleHTTPRequestHandler):
     def send_json(self,obj,status=200,headers=None):
         body=json.dumps(obj,ensure_ascii=False,separators=(',',':')).encode()
         self.send_response(status);self.send_header('Content-Type','application/json; charset=utf-8');self.send_header('Content-Length',str(len(body)));self.send_header('Cache-Control','no-store')
+        origin=self.headers.get('Origin','')
+        if urlparse(self.path).path=='/healthz' and origin in ('http://localhost','https://localhost'):
+            self.send_header('Access-Control-Allow-Origin',origin)
+            self.send_header('Vary','Origin')
         for k,v in (headers or {}).items(): self.send_header(k,v)
         self.end_headers();self.wfile.write(body)
     def send_error_json(self,msg,status=400): self.send_json({'error':msg},status)

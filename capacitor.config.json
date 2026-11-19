@@ -1,0 +1,10 @@
+{
+  "appId": "com.shelfwise.shop",
+  "appName": "ShelfWise",
+  "webDir": "mobile-shell",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true,
+    "allowNavigation": ["*"]
+  }
+}

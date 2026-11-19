@@ -47,7 +47,7 @@ The checked-in `render.yaml` describes:
 | SQLite database | `/var/data/shelfwise.sqlite3` |
 | Auto deploy | Off |
 
-The service binds to `0.0.0.0` in production and reads Render's `PORT` value (falling back to `10000`). Local development defaults to `127.0.0.1`; set `PORT=8765` to retain the usual local address.
+The service binds to `0.0.0.0` and reads Render's `PORT` value (falling back to `8765`). Local development uses port `8765`. The Android LAN demo uses this same port; do not configure public router forwarding.
 
 Render environment variables configured by the Blueprint:
 

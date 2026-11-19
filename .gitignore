@@ -32,6 +32,12 @@ env/
 .DS_Store
 *.log
 *.pid
+node_modules/
+package 2.json
+.gradle/
+local.properties
+android/app/build/
+android/build/
 
 # Build/editor artifacts
 dist/
