@@ -45,6 +45,7 @@ A private copy was created outside the project directory at `/Users/mohak/Docume
 | Updated server syntax | Passed: `python3 -m py_compile server.py migrate_sqlite.py` |
 | Dependency installation step | Passed: `python3 -m pip install -r requirements.txt` (no external packages required) |
 | Render Blueprint syntax/key fields | Passed: parsed `render.yaml` as YAML and checked service count, health path, and disk mount |
+| SQLite migration helper | Passed: copied the verified backup into a temporary target, validated integrity/table counts, and safely replaced a seeded demo-only target; test copies were temporary |
 | Route and static-file HTTP smoke test | Passed: 22 GET routes/assets returned 200, including homepage, login/register, 15 demo app paths, and `/healthz` |
 | Demo workspace API | Passed: returned 8 products and 270 historical sales from isolated test database |
 | Protected route and private database exposure | Passed: unauthenticated `/app` redirected; direct SQLite path returned 404 |
