@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: shelfwise
+    runtime: python
+    plan: 0.5c-512mb
+    region: singapore
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /healthz
+    autoDeployTrigger: off
+    numInstances: 1
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: SHELFWISE_HOST
+        value: 0.0.0.0
+      - key: SHELFWISE_DB_PATH
+        value: /var/data/shelfwise.sqlite3
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+    disk:
+      name: shelfwise-data
+      mountPath: /var/data
+      sizeGB: 1

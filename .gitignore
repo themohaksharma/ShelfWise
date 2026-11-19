@@ -1,0 +1,40 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Private application data (never publish user/shop data)
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.sqlite3.*
+*.db
+*.db-*
+*.bak
+*.backup
+*.backup-*
+*.dump
+*.sql.gz
+backups/
+local-backups/
+uploads/
+user_uploads/
+profile_uploads/
+storage/
+
+# Python and local tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.python-version.local
+.DS_Store
+*.log
+*.pid
+
+# Build/editor artifacts
+dist/
+build/
+.idea/
+.vscode/

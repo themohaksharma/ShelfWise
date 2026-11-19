@@ -1,0 +1,5 @@
+/* Shared authentication client used by both sign-in and registration routes. */
+(()=>{'use strict';
+async function send(path,payload){const response=await fetch(path,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});let result={};try{result=await response.json()}catch{}if(!response.ok)throw new Error(result.error||'Could not complete the request.');return result}
+window.ShelfWiseAuth={register:input=>send('/api/register',{owner:input.owner,shopName:input.shopName,identifier:input.email,category:input.category,address:input.address,password:input.password}),login:(identifier,password)=>send('/api/login',{identifier,password}),logout:async()=>{const r=await fetch('/api/session',{method:'DELETE',credentials:'same-origin'});if(!r.ok)throw new Error('Could not sign out.')},session:async()=>{const r=await fetch('/api/session',{credentials:'same-origin'});if(!r.ok)throw new Error('Could not check session.');return r.json()}};
+})();
